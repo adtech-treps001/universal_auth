@@ -1,0 +1,38 @@
+
+version: 2.0
+workflows:
+
+  1_EMAIL_ONLY_BASIC:
+    ui_style: WHITE_MINIMAL
+    enabled_auth_methods: [email_password, email_otp]
+    defaults:
+      primary_identity: email
+      default_role: user
+
+  2_EMAIL_SOCIAL_GOOGLE:
+    ui_style: WHITE_SOCIAL
+    enabled_auth_methods: [google, email_otp]
+    defaults:
+      primary_identity: email
+      default_role: user
+
+  3_EMAIL_SOCIAL_GOOGLE_APPLE:
+    ui_style: WHITE_SOCIAL
+    enabled_auth_methods: [google, apple, email_otp]
+    defaults:
+      primary_identity: email
+      default_role: user
+
+  4_DEV_SOCIAL_GITHUB_GOOGLE:
+    ui_style: WHITE_SOCIAL_DEV
+    enabled_auth_methods: [github, google]
+    defaults:
+      primary_identity: email
+      default_role: developer
+
+  5_ENTERPRISE_SSO_ONLY:
+    ui_style: ENTERPRISE_CLEAN
+    enabled_auth_methods: [enterprise_oidc]
+    defaults:
+      primary_identity: email
+      default_role: employee

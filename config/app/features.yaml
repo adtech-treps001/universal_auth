@@ -1,0 +1,13 @@
+
+features:
+  profile_view:
+    required_capabilities: [app:profile.read]
+
+  profile_edit:
+    required_capabilities: [app:profile.write]
+
+  google_login:
+    required_capabilities: [google:auth]
+
+  github_repo_view:
+    required_capabilities: [github:repo.read]

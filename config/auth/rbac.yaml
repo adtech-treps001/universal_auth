@@ -1,0 +1,13 @@
+
+roles:
+  viewer:
+    capabilities: [app:login, app:profile.read]
+
+  user:
+    capabilities: [app:login, app:profile.read, app:profile.write]
+
+  power_user:
+    capabilities: [app:login, app:profile.read, app:profile.write, integrations:connect]
+
+  admin:
+    capabilities: ["*"]

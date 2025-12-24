@@ -1,0 +1,11 @@
+
+tenants:
+  default:
+    overrides: {}
+
+  acme_corp:
+    overrides:
+      user:
+        add_capabilities:
+          - integrations:connect
+        remove_capabilities: []

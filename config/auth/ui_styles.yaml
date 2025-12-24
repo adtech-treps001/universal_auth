@@ -1,0 +1,32 @@
+
+ui_styles:
+
+  INDIA_MOBILE_MINIMAL:
+    background: white
+    layout: centered_card
+    order: [mobile, otp, name_conditional, email_optional]
+    providers_position: none
+
+  WHITE_MINIMAL:
+    background: white
+    layout: centered_card
+    order: [email, password_or_otp]
+    providers_position: none
+
+  WHITE_SOCIAL:
+    background: white
+    layout: centered_card
+    order: [social_buttons, email_optional]
+    providers_position: top
+
+  WHITE_SOCIAL_DEV:
+    background: white
+    layout: centered_card
+    order: [social_buttons]
+    providers_position: center
+
+  ENTERPRISE_CLEAN:
+    background: white
+    layout: centered_card
+    order: [enterprise_button]
+    providers_position: center

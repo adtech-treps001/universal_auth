@@ -1,0 +1,6 @@
+
+scopes:
+  project:
+    - project:{id}
+  repository:
+    - repo:{owner}/{name}

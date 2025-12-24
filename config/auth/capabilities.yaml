@@ -1,0 +1,13 @@
+
+capabilities:
+  app:login
+  app:profile.read
+  app:profile.write
+  app:admin.access
+  integrations:connect
+  google:auth
+  apple:auth
+  github:auth
+  google:drive.read
+  google:sheets.read
+  github:repo.read

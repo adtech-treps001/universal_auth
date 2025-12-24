@@ -10,11 +10,79 @@ services:
       POSTGRES_DB: authdb
     ports:
       - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U auth"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
 
   redis:
-    image: redis:7
+    image: redis:7-alpine
     ports:
       - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # OPA Policy Server
+  opa-server:
+    image: openpolicyagent/opa:latest-envoy
+    ports:
+      - "8181:8181"
+    command:
+      - "run"
+      - "--server"
+      - "--addr=0.0.0.0:8181"
+      - "--diagnostic-addr=0.0.0.0:8282"
+      - "--set=plugins.envoy_ext_authz_grpc.addr=:9191"
+      - "--set=plugins.envoy_ext_authz_grpc.enable_reflection=true"
+      - "--set=decision_logs.console=true"
+      - "/policies"
+    volumes:
+      - ./policy:/policies
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:8181/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Backend OPA Sidecar
+  opa-backend:
+    image: openpolicyagent/opa:latest
+    ports:
+      - "8182:8181"
+    command:
+      - "run"
+      - "--server"
+      - "--addr=0.0.0.0:8181"
+      - "--set=decision_logs.console=true"
+      - "/policies"
+    volumes:
+      - ./policy:/policies
+    depends_on:
+      - opa-server
+
+  # Frontend OPA Sidecar
+  opa-frontend:
+    image: openpolicyagent/opa:latest
+    ports:
+      - "8183:8181"
+    command:
+      - "run"
+      - "--server"
+      - "--addr=0.0.0.0:8181"
+      - "--set=decision_logs.console=true"
+      - "/policies"
+    volumes:
+      - ./policy:/policies
+    depends_on:
+      - opa-server
 
   auth-backend:
     build:
@@ -22,9 +90,24 @@ services:
       dockerfile: backend/Dockerfile
     ports:
       - "8000:8000"
+    environment:
+      - DATABASE_URL=postgresql://auth:auth@postgres:5432/authdb
+      - REDIS_URL=redis://redis:6379
+      - OPA_URL=http://opa-backend:8181
     depends_on:
-      - postgres
-      - redis
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      opa-backend:
+        condition: service_started
+    volumes:
+      - ./backend:/app
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
 
   frontend:
     build:
@@ -32,5 +115,18 @@ services:
       dockerfile: frontend/Dockerfile
     ports:
       - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:8000
+      - NEXT_PUBLIC_OPA_URL=http://localhost:8183
     depends_on:
-      - auth-backend
+      auth-backend:
+        condition: service_healthy
+      opa-frontend:
+        condition: service_started
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+
+volumes:
+  postgres_data:
+  redis_data:

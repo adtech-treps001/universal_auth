@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  # Playwright Testing Service
+  playwright-tests:
+    build:
+      context: .
+      dockerfile: Dockerfile.playwright
+    container_name: universal_auth_playwright
+    environment:
+      - BASE_URL=http://frontend:3000
+      - HEADLESS=false
+      - DISPLAY=:99
+    depends_on:
+      - frontend
+    volumes:
+      - ./screenshots:/app/screenshots
+      - ./test_results:/app/test_results
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+    networks:
+      - auth_network
+    profiles:
+      - playwright
+
+networks:
+  auth_network:
+    external: true

@@ -1,23 +1,51 @@
 
 providers:
   google:
-    type: oauth2
+    type: google
     client_id_env: GOOGLE_CLIENT_ID
     client_secret_env: GOOGLE_CLIENT_SECRET
     auth_url: https://accounts.google.com/o/oauth2/v2/auth
     token_url: https://oauth2.googleapis.com/token
     userinfo_url: https://openidconnect.googleapis.com/v1/userinfo
     scopes: [openid, email, profile]
-
-  apple:
-    type: oauth2
-    auth_url: https://appleid.apple.com/auth/authorize
-    token_url: https://appleid.apple.com/auth/token
-    scopes: [name, email]
+    redirect_uri: http://localhost:8000/auth/callback/google
 
   github:
-    type: oauth2
+    type: github
+    client_id_env: GITHUB_CLIENT_ID
+    client_secret_env: GITHUB_CLIENT_SECRET
     auth_url: https://github.com/login/oauth/authorize
     token_url: https://github.com/login/oauth/access_token
     userinfo_url: https://api.github.com/user
     scopes: [user:email]
+    redirect_uri: http://localhost:8000/auth/callback/github
+
+  linkedin:
+    type: linkedin
+    client_id_env: LINKEDIN_CLIENT_ID
+    client_secret_env: LINKEDIN_CLIENT_SECRET
+    auth_url: https://www.linkedin.com/oauth/v2/authorization
+    token_url: https://www.linkedin.com/oauth/v2/accessToken
+    userinfo_url: https://api.linkedin.com/v2/people/~:(id,firstName,lastName,emailAddress,pictureUrl)
+    scopes: [r_liteprofile, r_emailaddress]
+    redirect_uri: http://localhost:8000/auth/callback/linkedin
+
+  apple:
+    type: apple
+    client_id_env: APPLE_CLIENT_ID
+    client_secret_env: APPLE_CLIENT_SECRET
+    auth_url: https://appleid.apple.com/auth/authorize
+    token_url: https://appleid.apple.com/auth/token
+    userinfo_url: https://appleid.apple.com/auth/userinfo
+    scopes: [name, email]
+    redirect_uri: http://localhost:8000/auth/callback/apple
+
+  meta:
+    type: meta
+    client_id_env: META_CLIENT_ID
+    client_secret_env: META_CLIENT_SECRET
+    auth_url: https://www.facebook.com/v18.0/dialog/oauth
+    token_url: https://graph.facebook.com/v18.0/oauth/access_token
+    userinfo_url: https://graph.facebook.com/v18.0/me?fields=id,name,email,first_name,last_name,picture
+    scopes: [email, public_profile]
+    redirect_uri: http://localhost:8000/auth/callback/meta

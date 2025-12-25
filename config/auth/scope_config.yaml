@@ -1,0 +1,78 @@
+# Scope Management Configuration
+# This file configures dynamic scope management behavior
+
+scope_management:
+  # Polling configuration
+  polling:
+    enabled: true
+    interval_seconds: 30  # How often to check for scope changes
+    batch_size: 100      # Maximum changes to process per batch
+    
+  # Session invalidation settings
+  session_invalidation:
+    enabled: true
+    grace_period_minutes: 5    # Grace period before invalidating sessions
+    notify_before_invalidation: true
+    
+  # Scope version checking
+  version_checking:
+    enabled: true
+    max_age_minutes: 30        # Maximum age before forcing scope check
+    check_on_api_request: true # Check scope version on each API request
+    
+  # WebSocket notifications
+  websocket:
+    enabled: true
+    keepalive_interval_seconds: 30
+    connection_timeout_seconds: 300
+    max_connections_per_user: 5
+    
+  # Caching settings
+  caching:
+    enabled: true
+    scope_version_ttl_seconds: 300  # Cache scope versions for 5 minutes
+    capability_cache_ttl_seconds: 600  # Cache capabilities for 10 minutes
+    
+  # Logging and monitoring
+  logging:
+    log_scope_changes: true
+    log_session_invalidations: true
+    log_websocket_events: false  # Set to true for debugging
+    
+  # Security settings
+  security:
+    require_secure_websocket: false  # Set to true in production
+    validate_token_on_websocket: true
+    max_failed_scope_checks: 3
+    
+# Event types that trigger scope changes
+scope_change_triggers:
+  - role_assignment
+  - role_removal
+  - capability_grant
+  - capability_revoke
+  - tenant_membership_change
+  - admin_override
+  
+# Notification templates
+notifications:
+  scope_change:
+    title: "Permissions Updated"
+    message: "Your permissions have been updated. Please refresh your session to continue."
+    action_required: true
+    
+  session_invalidated:
+    title: "Session Expired"
+    message: "Your session has been invalidated due to permission changes. Please log in again."
+    action_required: true
+    
+  role_change:
+    title: "Role Changed"
+    message: "Your role has been changed. New permissions are now active."
+    action_required: false
+    
+# Rate limiting for scope operations
+rate_limiting:
+  scope_updates_per_minute: 60
+  websocket_messages_per_minute: 120
+  scope_checks_per_minute: 300

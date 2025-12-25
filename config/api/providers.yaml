@@ -1,0 +1,287 @@
+# API Key Provider Configurations
+# This file defines supported API providers and their configurations
+
+providers:
+  # OpenAI Configuration
+  openai:
+    name: "OpenAI"
+    description: "OpenAI GPT models and APIs"
+    base_url: "https://api.openai.com/v1"
+    key_format: "sk-"
+    key_min_length: 20
+    supported_models:
+      - "gpt-4"
+      - "gpt-4-turbo"
+      - "gpt-3.5-turbo"
+      - "text-embedding-ada-002"
+      - "dall-e-3"
+      - "whisper-1"
+      - "tts-1"
+    default_scopes:
+      - "chat.completions"
+      - "embeddings"
+      - "images"
+      - "audio"
+    rate_limits:
+      requests_per_minute: 3500
+      tokens_per_minute: 90000
+    pricing:
+      gpt-4: 
+        input: 0.03
+        output: 0.06
+      gpt-3.5-turbo:
+        input: 0.0015
+        output: 0.002
+
+  # Google Gemini Configuration
+  gemini:
+    name: "Google Gemini"
+    description: "Google's Gemini AI models"
+    base_url: "https://generativelanguage.googleapis.com/v1"
+    key_format: ""  # No specific prefix
+    key_min_length: 20
+    supported_models:
+      - "gemini-pro"
+      - "gemini-pro-vision"
+      - "gemini-ultra"
+    default_scopes:
+      - "generateContent"
+      - "embedContent"
+    rate_limits:
+      requests_per_minute: 60
+      requests_per_day: 1500
+    pricing:
+      gemini-pro:
+        input: 0.00025
+        output: 0.0005
+
+  # Anthropic Claude Configuration
+  anthropic:
+    name: "Anthropic Claude"
+    description: "Anthropic's Claude AI models"
+    base_url: "https://api.anthropic.com/v1"
+    key_format: "sk-ant-"
+    key_min_length: 20
+    supported_models:
+      - "claude-3-opus-20240229"
+      - "claude-3-sonnet-20240229"
+      - "claude-3-haiku-20240307"
+      - "claude-2.1"
+      - "claude-2.0"
+    default_scopes:
+      - "messages"
+      - "completions"
+    rate_limits:
+      requests_per_minute: 1000
+      tokens_per_minute: 40000
+    pricing:
+      claude-3-opus:
+        input: 0.015
+        output: 0.075
+      claude-3-sonnet:
+        input: 0.003
+        output: 0.015
+
+  # Azure OpenAI Configuration
+  azure_openai:
+    name: "Azure OpenAI"
+    description: "Microsoft Azure OpenAI Service"
+    base_url: "https://{resource}.openai.azure.com/openai/deployments/{deployment}"
+    key_format: ""  # No specific prefix
+    key_min_length: 20
+    supported_models:
+      - "gpt-4"
+      - "gpt-35-turbo"
+      - "text-embedding-ada-002"
+      - "dall-e-3"
+    default_scopes:
+      - "chat.completions"
+      - "completions"
+      - "embeddings"
+      - "images"
+    rate_limits:
+      requests_per_minute: 240
+      tokens_per_minute: 40000
+    additional_config:
+      requires_deployment_name: true
+      requires_resource_name: true
+      api_version: "2024-02-01"
+
+  # Custom Provider Template
+  custom:
+    name: "Custom Provider"
+    description: "Custom API provider configuration"
+    base_url: ""  # To be configured by user
+    key_format: ""  # No specific format
+    key_min_length: 8
+    supported_models: []  # To be configured by user
+    default_scopes: []
+    rate_limits:
+      requests_per_minute: 60
+      tokens_per_minute: 10000
+
+# Default API Key Templates
+templates:
+  # Development Template
+  development:
+    name: "Development"
+    description: "Template for development and testing"
+    default_config:
+      expires_in_days: 30
+      rate_limits:
+        requests_per_minute: 100
+        tokens_per_minute: 10000
+      scopes:
+        - "chat.completions"
+        - "embeddings"
+      ip_whitelist: []
+      allowed_roles:
+        - "developer"
+        - "admin"
+
+  # Production Template
+  production:
+    name: "Production"
+    description: "Template for production use"
+    default_config:
+      expires_in_days: 90
+      rate_limits:
+        requests_per_minute: 1000
+        tokens_per_minute: 50000
+      scopes:
+        - "chat.completions"
+        - "embeddings"
+        - "images"
+      ip_whitelist: []
+      allowed_roles:
+        - "service"
+        - "admin"
+
+  # Testing Template
+  testing:
+    name: "Testing"
+    description: "Template for automated testing"
+    default_config:
+      expires_in_days: 7
+      rate_limits:
+        requests_per_minute: 50
+        tokens_per_minute: 5000
+      scopes:
+        - "chat.completions"
+      ip_whitelist: []
+      allowed_roles:
+        - "tester"
+        - "developer"
+
+  # Enterprise Template
+  enterprise:
+    name: "Enterprise"
+    description: "Template for enterprise deployments"
+    default_config:
+      expires_in_days: 365
+      rate_limits:
+        requests_per_minute: 5000
+        tokens_per_minute: 200000
+      scopes:
+        - "chat.completions"
+        - "embeddings"
+        - "images"
+        - "audio"
+      ip_whitelist: []
+      allowed_roles:
+        - "service"
+        - "admin"
+        - "enterprise_user"
+
+# Security Settings
+security:
+  # Encryption settings
+  encryption:
+    algorithm: "AES-256-GCM"
+    key_derivation: "PBKDF2"
+    iterations: 100000
+    
+  # Key rotation settings
+  rotation:
+    default_schedule: "quarterly"  # monthly, quarterly, yearly
+    grace_period_hours: 24
+    auto_rotation_enabled: false
+    
+  # Access control
+  access_control:
+    require_ip_whitelist: false
+    require_role_based_access: true
+    audit_all_access: true
+    
+  # Validation settings
+  validation:
+    enforce_key_format: true
+    check_key_strength: true
+    min_key_strength_score: 60
+
+# Monitoring and Alerting
+monitoring:
+  # Usage tracking
+  usage_tracking:
+    enabled: true
+    track_tokens: true
+    track_costs: true
+    track_errors: true
+    
+  # Alerts
+  alerts:
+    high_usage_threshold: 0.8  # 80% of rate limit
+    cost_threshold_usd: 100.0
+    error_rate_threshold: 0.1  # 10% error rate
+    
+  # Retention
+  retention:
+    usage_logs_days: 90
+    audit_logs_days: 365
+    rotation_history_days: 1095  # 3 years
+
+# Rate Limiting Configuration
+rate_limiting:
+  # Global defaults
+  global_defaults:
+    requests_per_minute: 1000
+    tokens_per_minute: 50000
+    burst_allowance: 1.5  # 50% burst above limit
+    
+  # Per-provider overrides
+  provider_overrides:
+    openai:
+      requests_per_minute: 3500
+      tokens_per_minute: 90000
+    gemini:
+      requests_per_minute: 60
+      requests_per_day: 1500
+    anthropic:
+      requests_per_minute: 1000
+      tokens_per_minute: 40000
+      
+  # Enforcement
+  enforcement:
+    enabled: true
+    block_on_limit: true
+    grace_period_seconds: 60
+    
+# Cost Management
+cost_management:
+  # Budget settings
+  budgets:
+    default_monthly_limit_usd: 1000.0
+    alert_thresholds: [0.5, 0.8, 0.95]  # 50%, 80%, 95%
+    
+  # Cost tracking
+  tracking:
+    enabled: true
+    currency: "USD"
+    update_frequency_hours: 1
+    
+  # Billing
+  billing:
+    aggregate_by_project: true
+    aggregate_by_user: true
+    export_format: "csv"
+    export_schedule: "monthly"

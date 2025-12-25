@@ -1,0 +1,26 @@
+{
+  "name": "universal-auth-playwright-test",
+  "version": "1.0.0",
+  "description": "Playwright automation testing for Universal Auth frontend",
+  "main": "playwright-test.js",
+  "scripts": {
+    "test": "node playwright-test.js",
+    "test:headless": "HEADLESS=true node playwright-test.js",
+    "install-browsers": "npx playwright install"
+  },
+  "keywords": [
+    "playwright",
+    "automation",
+    "testing",
+    "universal-auth",
+    "frontend"
+  ],
+  "author": "Universal Auth Team",
+  "license": "MIT",
+  "dependencies": {
+    "playwright": "^1.40.0"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}

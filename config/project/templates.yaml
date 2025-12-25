@@ -1,0 +1,780 @@
+# Project Configuration Templates
+# These templates provide pre-configured setups for common project types
+
+templates:
+  # Enterprise SaaS Template
+  enterprise_saas:
+    template_name: "Enterprise SaaS"
+    template_type: "full"
+    template_category: "enterprise"
+    description: "Complete configuration for enterprise SaaS applications with advanced security and compliance features"
+    version: "1.0"
+    is_featured: true
+    template_config:
+      auth:
+        require_email_verification: true
+        allow_social_login: true
+        require_mfa: true
+        session_timeout_minutes: 30
+        max_login_attempts: 3
+        password_policy:
+          min_length: 12
+          require_uppercase: true
+          require_lowercase: true
+          require_numbers: true
+          require_symbols: true
+        oauth_providers:
+          - google
+          - microsoft
+          - okta
+      ui:
+        theme: "professional"
+        show_branding: true
+        custom_css_enabled: true
+        responsive_design: true
+        accessibility_compliant: true
+      workflow:
+        onboarding_enabled: true
+        progressive_profiling: true
+        approval_required: true
+        admin_approval_for_signup: true
+        email_verification_required: true
+      integration:
+        audit_logging: true
+        sso_enabled: true
+        api_rate_limiting: true
+        webhook_notifications: true
+
+  # Startup MVP Template
+  startup_mvp:
+    template_name: "Startup MVP"
+    template_type: "full"
+    template_category: "startup"
+    description: "Minimal viable product configuration for startups focusing on quick user onboarding"
+    version: "1.0"
+    is_featured: true
+    template_config:
+      auth:
+        require_email_verification: false
+        allow_social_login: true
+        require_mfa: false
+        session_timeout_minutes: 120
+        max_login_attempts: 5
+        oauth_providers:
+          - google
+          - github
+      ui:
+        theme: "modern"
+        show_branding: true
+        custom_css_enabled: false
+        responsive_design: true
+      workflow:
+        onboarding_enabled: true
+        progressive_profiling: false
+        approval_required: false
+        quick_signup: true
+      integration:
+        audit_logging: false
+        analytics_tracking: true
+
+  # Community Platform Template
+  community_platform:
+    template_name: "Community Platform"
+    template_type: "full"
+    template_category: "community"
+    description: "Configuration optimized for community platforms with social features"
+    version: "1.0"
+    template_config:
+      auth:
+        require_email_verification: true
+        allow_social_login: true
+        require_mfa: false
+        session_timeout_minutes: 60
+        max_login_attempts: 5
+        oauth_providers:
+          - google
+          - facebook
+          - twitter
+          - discord
+      ui:
+        theme: "community"
+        show_branding: true
+        custom_css_enabled: true
+        user_profiles_enabled: true
+        avatar_upload: true
+      workflow:
+        onboarding_enabled: true
+        progressive_profiling: true
+        approval_required: false
+        community_guidelines_acceptance: true
+        profile_completion_incentives: true
+      integration:
+        notification_system: true
+        user_activity_tracking: true
+        content_moderation: true
+
+  # E-commerce Template
+  ecommerce:
+    template_name: "E-commerce"
+    template_type: "full"
+    template_category: "ecommerce"
+    description: "Configuration for e-commerce platforms with customer account management"
+    version: "1.0"
+    template_config:
+      auth:
+        require_email_verification: true
+        allow_social_login: true
+        allow_guest_checkout: true
+        require_mfa: false
+        session_timeout_minutes: 60
+        oauth_providers:
+          - google
+          - facebook
+          - apple
+      ui:
+        theme: "ecommerce"
+        show_branding: true
+        custom_css_enabled: true
+        shopping_cart_integration: true
+      workflow:
+        onboarding_enabled: true
+        progressive_profiling: true
+        approval_required: false
+        address_collection: true
+        payment_method_setup: true
+        order_history_access: true
+      integration:
+        payment_processing: true
+        order_management: true
+        customer_support: true
+        marketing_automation: true
+
+  # Educational Platform Template
+  educational:
+    template_name: "Educational Platform"
+    template_type: "full"
+    template_category: "education"
+    description: "Configuration for educational platforms with student and instructor roles"
+    version: "1.0"
+    template_config:
+      auth:
+        require_email_verification: true
+        allow_social_login: true
+        require_mfa: false
+        session_timeout_minutes: 180
+        role_based_access: true
+        oauth_providers:
+          - google
+          - microsoft
+      ui:
+        theme: "educational"
+        show_branding: true
+        custom_css_enabled: true
+        course_navigation: true
+        progress_tracking: true
+      workflow:
+        onboarding_enabled: true
+        progressive_profiling: true
+        approval_required: false
+        role_selection: true
+        course_enrollment: true
+        instructor_verification: true
+      integration:
+        lms_integration: true
+        grade_tracking: true
+        assignment_submission: true
+        video_conferencing: true
+
+  # Healthcare Template
+  healthcare:
+    template_name: "Healthcare Platform"
+    template_type: "full"
+    template_category: "healthcare"
+    description: "HIPAA-compliant configuration for healthcare applications"
+    version: "1.0"
+    template_config:
+      auth:
+        require_email_verification: true
+        allow_social_login: false
+        require_mfa: true
+        session_timeout_minutes: 15
+        max_login_attempts: 3
+        hipaa_compliant: true
+        audit_all_access: true
+      ui:
+        theme: "healthcare"
+        show_branding: true
+        custom_css_enabled: false
+        accessibility_compliant: true
+        privacy_notices: true
+      workflow:
+        onboarding_enabled: true
+        progressive_profiling: true
+        approval_required: true
+        identity_verification: true
+        consent_management: true
+        privacy_agreement: true
+      integration:
+        audit_logging: true
+        encryption_at_rest: true
+        secure_messaging: true
+        appointment_scheduling: true
+
+  # Indian Fintech Template
+  indian_fintech:
+    template_name: "Indian Fintech"
+    template_type: "full"
+    template_category: "fintech"
+    description: "Mobile-first authentication optimized for Indian fintech applications with progressive KYC"
+    version: "1.0"
+    is_featured: true
+    region: "india"
+    template_config:
+      auth:
+        primary_method: "mobile_otp"
+        require_mobile_verification: true
+        mobile_number_format: "indian"
+        country_code: "+91"
+        allow_social_login: false
+        require_mfa: false
+        session_timeout_minutes: 30
+        max_login_attempts: 5
+        otp_length: 6
+        otp_expiry_minutes: 5
+      ui:
+        theme: "indian_fintech"
+        show_branding: true
+        custom_css_enabled: true
+        responsive_design: true
+        mobile_first: true
+        language_options: ["hindi", "english"]
+        currency_display: "INR"
+      workflow:
+        onboarding_enabled: true
+        progressive_profiling: true
+        approval_required: false
+        mobile_first_flow: true
+        kyc_integration: true
+        progressive_kyc_steps:
+          - step: "mobile_verification"
+            required: true
+            fields: ["mobile_number"]
+          - step: "basic_info"
+            required: true
+            fields: ["full_name", "date_of_birth"]
+          - step: "address_info"
+            required: false
+            fields: ["address", "city", "state", "pin_code"]
+          - step: "identity_verification"
+            required: false
+            fields: ["pan_number", "aadhaar_number"]
+          - step: "bank_details"
+            required: false
+            fields: ["bank_account", "ifsc_code"]
+      integration:
+        sms_provider: "indian_sms"
+        payment_gateway: "razorpay"
+        kyc_verification: "aadhaar_api"
+        bank_verification: "penny_drop"
+        audit_logging: true
+
+  # Indian E-commerce Template
+  indian_ecommerce:
+    template_name: "Indian E-commerce"
+    template_type: "full"
+    template_category: "ecommerce"
+    description: "Mobile-first e-commerce authentication with progressive address collection for Indian market"
+    version: "1.0"
+    is_featured: true
+    region: "india"
+    template_config:
+      auth:
+        primary_method: "mobile_otp"
+        require_mobile_verification: true
+        mobile_number_format: "indian"
+        country_code: "+91"
+        allow_social_login: true
+        allow_guest_checkout: true
+        require_mfa: false
+        session_timeout_minutes: 120
+        oauth_providers: ["google"]
+      ui:
+        theme: "indian_ecommerce"
+        show_branding: true
+        custom_css_enabled: true
+        mobile_first: true
+        language_options: ["hindi", "english", "tamil", "bengali"]
+        currency_display: "INR"
+        regional_customization: true
+      workflow:
+        onboarding_enabled: true
+        progressive_profiling: true
+        approval_required: false
+        mobile_first_flow: true
+        progressive_steps:
+          - step: "mobile_verification"
+            required: true
+            fields: ["mobile_number"]
+          - step: "basic_info"
+            required: false
+            fields: ["full_name", "email"]
+          - step: "delivery_address"
+            required: false
+            trigger: "first_order"
+            fields: ["address", "city", "state", "pin_code", "landmark"]
+          - step: "preferences"
+            required: false
+            trigger: "third_login"
+            fields: ["language_preference", "category_interests"]
+      integration:
+        sms_provider: "indian_sms"
+        payment_gateway: "razorpay"
+        logistics_integration: "delhivery"
+        regional_language_support: true
+
+  # Indian EdTech Template
+  indian_edtech:
+    template_name: "Indian EdTech"
+    template_type: "full"
+    template_category: "education"
+    description: "Mobile-first educational platform authentication optimized for Indian students and parents"
+    version: "1.0"
+    region: "india"
+    template_config:
+      auth:
+        primary_method: "mobile_otp"
+        require_mobile_verification: true
+        mobile_number_format: "indian"
+        country_code: "+91"
+        allow_social_login: true
+        require_mfa: false
+        session_timeout_minutes: 180
+        oauth_providers: ["google"]
+        parent_consent_required: true
+      ui:
+        theme: "indian_edtech"
+        show_branding: true
+        custom_css_enabled: true
+        mobile_first: true
+        language_options: ["hindi", "english", "regional_languages"]
+        accessibility_compliant: true
+        parent_dashboard: true
+      workflow:
+        onboarding_enabled: true
+        progressive_profiling: true
+        approval_required: false
+        mobile_first_flow: true
+        role_based_onboarding: true
+        progressive_steps:
+          - step: "mobile_verification"
+            required: true
+            fields: ["mobile_number"]
+          - step: "role_selection"
+            required: true
+            options: ["student", "parent", "teacher"]
+          - step: "student_info"
+            required: true
+            condition: "role == 'student'"
+            fields: ["student_name", "class", "school"]
+          - step: "parent_info"
+            required: true
+            condition: "role == 'parent'"
+            fields: ["parent_name", "student_name", "relationship"]
+          - step: "academic_details"
+            required: false
+            trigger: "course_enrollment"
+            fields: ["board", "subjects", "academic_year"]
+      integration:
+        sms_provider: "indian_sms"
+        video_conferencing: "jitsi"
+        payment_gateway: "razorpay"
+        regional_language_support: true
+        parent_notification_system: true
+
+  # Indian Healthcare Template
+  indian_healthcare:
+    template_name: "Indian Healthcare"
+    template_type: "full"
+    template_category: "healthcare"
+    description: "Mobile-first healthcare authentication with progressive medical history collection"
+    version: "1.0"
+    region: "india"
+    template_config:
+      auth:
+        primary_method: "mobile_otp"
+        require_mobile_verification: true
+        mobile_number_format: "indian"
+        country_code: "+91"
+        allow_social_login: false
+        require_mfa: true
+        session_timeout_minutes: 20
+        max_login_attempts: 3
+        hipaa_equivalent_compliance: true
+      ui:
+        theme: "indian_healthcare"
+        show_branding: true
+        custom_css_enabled: false
+        mobile_first: true
+        language_options: ["hindi", "english", "regional_languages"]
+        accessibility_compliant: true
+        privacy_notices: true
+        medical_disclaimer: true
+      workflow:
+        onboarding_enabled: true
+        progressive_profiling: true
+        approval_required: true
+        mobile_first_flow: true
+        medical_consent_required: true
+        progressive_steps:
+          - step: "mobile_verification"
+            required: true
+            fields: ["mobile_number"]
+          - step: "basic_info"
+            required: true
+            fields: ["full_name", "date_of_birth", "gender"]
+          - step: "emergency_contact"
+            required: true
+            fields: ["emergency_contact_name", "emergency_mobile"]
+          - step: "medical_history"
+            required: false
+            trigger: "first_consultation"
+            fields: ["allergies", "chronic_conditions", "current_medications"]
+          - step: "insurance_details"
+            required: false
+            trigger: "insurance_claim"
+            fields: ["insurance_provider", "policy_number"]
+      integration:
+        sms_provider: "indian_sms"
+        telemedicine_platform: "practo"
+        payment_gateway: "razorpay"
+        medical_records_system: true
+        appointment_scheduling: true
+        prescription_management: true
+
+# Workflow Templates
+workflow_templates:
+  # Standard Authentication Workflow
+  standard_auth:
+    workflow_name: "Standard Authentication"
+    workflow_type: "authentication"
+    description: "Standard email/password authentication with optional social login"
+    workflow_steps:
+      - step: "login_method_selection"
+        type: "choice"
+        options: ["email", "social"]
+        required: true
+      - step: "email_password_login"
+        type: "form"
+        condition: "login_method == 'email'"
+        fields:
+          - name: "email"
+            type: "email"
+            required: true
+          - name: "password"
+            type: "password"
+            required: true
+      - step: "social_login"
+        type: "oauth"
+        condition: "login_method == 'social'"
+        providers: ["google", "github"]
+      - step: "mfa_verification"
+        type: "mfa"
+        condition: "mfa_required == true"
+        methods: ["totp", "sms"]
+
+  # Progressive Onboarding Workflow
+  progressive_onboarding:
+    workflow_name: "Progressive Onboarding"
+    workflow_type: "onboarding"
+    description: "Multi-step onboarding with progressive profile completion"
+    workflow_steps:
+      - step: "welcome"
+        type: "info"
+        title: "Welcome!"
+        content: "Let's get you set up"
+      - step: "basic_info"
+        type: "form"
+        title: "Basic Information"
+        fields:
+          - name: "first_name"
+            type: "text"
+            required: true
+          - name: "last_name"
+            type: "text"
+            required: true
+      - step: "role_selection"
+        type: "choice"
+        title: "What's your role?"
+        options: ["developer", "designer", "manager", "other"]
+        required: true
+      - step: "company_info"
+        type: "form"
+        title: "Company Information"
+        condition: "role != 'personal'"
+        fields:
+          - name: "company"
+            type: "text"
+            required: false
+          - name: "job_title"
+            type: "text"
+            required: false
+      - step: "preferences"
+        type: "form"
+        title: "Preferences"
+        fields:
+          - name: "timezone"
+            type: "select"
+            required: false
+          - name: "language"
+            type: "select"
+            required: false
+      - step: "completion"
+        type: "info"
+        title: "All set!"
+        content: "Your account is ready to use"
+
+  # Indian Mobile-First Workflow
+  indian_mobile_first:
+    workflow_name: "Indian Mobile-First Authentication"
+    workflow_type: "authentication"
+    description: "Mobile number first authentication optimized for Indian users"
+    region: "india"
+    workflow_steps:
+      - step: "mobile_number_entry"
+        type: "form"
+        title: "Enter Mobile Number"
+        title_hindi: "मोबाइल नंबर दर्ज करें"
+        fields:
+          - name: "mobile_number"
+            type: "tel"
+            required: true
+            pattern: "^[6-9]\\d{9}$"
+            placeholder: "Enter 10-digit mobile number"
+            placeholder_hindi: "10 अंकों का मोबाइल नंबर दर्ज करें"
+            country_code: "+91"
+            validation_message: "Please enter a valid Indian mobile number"
+            validation_message_hindi: "कृपया एक वैध भारतीय मोबाइल नंबर दर्ज करें"
+      - step: "otp_verification"
+        type: "otp"
+        title: "Verify Mobile Number"
+        title_hindi: "मोबाइल नंबर सत्यापित करें"
+        otp_length: 6
+        resend_timeout: 30
+        max_attempts: 3
+        content: "Enter the 6-digit code sent to your mobile"
+        content_hindi: "आपके मोबाइल पर भेजा गया 6 अंकों का कोड दर्ज करें"
+      - step: "welcome_message"
+        type: "info"
+        title: "Welcome!"
+        title_hindi: "स्वागत है!"
+        content: "Your mobile number has been verified successfully"
+        content_hindi: "आपका मोबाइल नंबर सफलतापूर्वक सत्यापित हो गया है"
+
+  # Indian Progressive Profiling Workflow
+  indian_progressive_profiling:
+    workflow_name: "Indian Progressive Profiling"
+    workflow_type: "profiling"
+    description: "Progressive profile completion with Indian-specific fields"
+    region: "india"
+    workflow_steps:
+      - step: "basic_details"
+        type: "form"
+        title: "Basic Details"
+        title_hindi: "बुनियादी विवरण"
+        trigger: "immediate"
+        fields:
+          - name: "full_name"
+            type: "text"
+            required: true
+            placeholder: "Enter your full name"
+            placeholder_hindi: "अपना पूरा नाम दर्ज करें"
+          - name: "date_of_birth"
+            type: "date"
+            required: false
+            placeholder: "Select date of birth"
+            placeholder_hindi: "जन्म तिथि चुनें"
+      - step: "location_details"
+        type: "form"
+        title: "Location Details"
+        title_hindi: "स्थान विवरण"
+        trigger: "second_login"
+        fields:
+          - name: "state"
+            type: "select"
+            required: false
+            options: ["Andhra Pradesh", "Assam", "Bihar", "Delhi", "Gujarat", "Karnataka", "Kerala", "Maharashtra", "Tamil Nadu", "Uttar Pradesh", "West Bengal"]
+            placeholder: "Select your state"
+            placeholder_hindi: "अपना राज्य चुनें"
+          - name: "city"
+            type: "text"
+            required: false
+            placeholder: "Enter your city"
+            placeholder_hindi: "अपना शहर दर्ज करें"
+          - name: "pin_code"
+            type: "text"
+            required: false
+            pattern: "^[1-9][0-9]{5}$"
+            placeholder: "Enter PIN code"
+            placeholder_hindi: "पिन कोड दर्ज करें"
+      - step: "preferences"
+        type: "form"
+        title: "Preferences"
+        title_hindi: "प्राथमिकताएं"
+        trigger: "third_login"
+        fields:
+          - name: "language_preference"
+            type: "select"
+            required: false
+            options: ["English", "Hindi", "Tamil", "Bengali", "Telugu", "Marathi", "Gujarati", "Kannada", "Malayalam", "Punjabi"]
+            placeholder: "Select preferred language"
+            placeholder_hindi: "पसंदीदा भाषा चुनें"
+          - name: "communication_preference"
+            type: "checkbox"
+            options: ["SMS", "WhatsApp", "Email", "Push Notifications"]
+            placeholder: "How would you like to receive updates?"
+            placeholder_hindi: "आप अपडेट कैसे प्राप्त करना चाहेंगे?"
+
+# Theme Templates
+theme_templates:
+  # Modern Theme
+  modern:
+    theme_name: "Modern"
+    description: "Clean, modern design with subtle shadows and rounded corners"
+    primary_color: "#3B82F6"
+    secondary_color: "#64748B"
+    accent_color: "#10B981"
+    background_color: "#FFFFFF"
+    text_color: "#1F2937"
+    font_family: "Inter, system-ui, sans-serif"
+    font_size_base: "16px"
+    border_radius: "8px"
+    spacing_unit: "8px"
+    css_variables:
+      "--shadow-sm": "0 1px 2px 0 rgb(0 0 0 / 0.05)"
+      "--shadow-md": "0 4px 6px -1px rgb(0 0 0 / 0.1)"
+      "--transition": "all 0.2s ease-in-out"
+
+  # Professional Theme
+  professional:
+    theme_name: "Professional"
+    description: "Conservative, professional design suitable for enterprise applications"
+    primary_color: "#1E40AF"
+    secondary_color: "#6B7280"
+    accent_color: "#059669"
+    background_color: "#F9FAFB"
+    text_color: "#111827"
+    font_family: "system-ui, -apple-system, sans-serif"
+    font_size_base: "14px"
+    border_radius: "4px"
+    spacing_unit: "8px"
+
+  # Community Theme
+  community:
+    theme_name: "Community"
+    description: "Friendly, approachable design for community platforms"
+    primary_color: "#7C3AED"
+    secondary_color: "#8B5CF6"
+    accent_color: "#F59E0B"
+    background_color: "#FFFFFF"
+    text_color: "#374151"
+    font_family: "Poppins, system-ui, sans-serif"
+    font_size_base: "16px"
+    border_radius: "12px"
+    spacing_unit: "12px"
+
+  # Healthcare Theme
+  healthcare:
+    theme_name: "Healthcare"
+    description: "Calm, trustworthy design for healthcare applications"
+    primary_color: "#0EA5E9"
+    secondary_color: "#64748B"
+    accent_color: "#22C55E"
+    background_color: "#FEFEFE"
+    text_color: "#1E293B"
+    font_family: "system-ui, sans-serif"
+    font_size_base: "16px"
+    border_radius: "6px"
+    spacing_unit: "8px"
+
+  # Indian Fintech Theme
+  indian_fintech:
+    theme_name: "Indian Fintech"
+    description: "Trust-focused design for Indian fintech applications with mobile-first approach"
+    primary_color: "#1565C0"
+    secondary_color: "#424242"
+    accent_color: "#4CAF50"
+    background_color: "#FAFAFA"
+    text_color: "#212121"
+    font_family: "Roboto, system-ui, sans-serif"
+    font_size_base: "16px"
+    border_radius: "8px"
+    spacing_unit: "12px"
+    mobile_optimized: true
+    css_variables:
+      "--success-color": "#4CAF50"
+      "--warning-color": "#FF9800"
+      "--error-color": "#F44336"
+      "--shadow-mobile": "0 2px 8px rgba(0,0,0,0.1)"
+      "--touch-target": "44px"
+
+  # Indian E-commerce Theme
+  indian_ecommerce:
+    theme_name: "Indian E-commerce"
+    description: "Vibrant, engaging design for Indian e-commerce platforms"
+    primary_color: "#E91E63"
+    secondary_color: "#9C27B0"
+    accent_color: "#FF5722"
+    background_color: "#FFFFFF"
+    text_color: "#263238"
+    font_family: "Open Sans, system-ui, sans-serif"
+    font_size_base: "16px"
+    border_radius: "12px"
+    spacing_unit: "16px"
+    mobile_optimized: true
+    css_variables:
+      "--sale-color": "#FF5722"
+      "--discount-color": "#4CAF50"
+      "--rating-color": "#FFC107"
+      "--shadow-card": "0 4px 12px rgba(0,0,0,0.15)"
+
+  # Indian EdTech Theme
+  indian_edtech:
+    theme_name: "Indian EdTech"
+    description: "Friendly, educational design for Indian learning platforms"
+    primary_color: "#3F51B5"
+    secondary_color: "#607D8B"
+    accent_color: "#FF9800"
+    background_color: "#F8F9FA"
+    text_color: "#37474F"
+    font_family: "Nunito, system-ui, sans-serif"
+    font_size_base: "16px"
+    border_radius: "10px"
+    spacing_unit: "12px"
+    mobile_optimized: true
+    css_variables:
+      "--progress-color": "#4CAF50"
+      "--achievement-color": "#FFC107"
+      "--lesson-color": "#2196F3"
+      "--shadow-soft": "0 2px 10px rgba(0,0,0,0.08)"
+
+  # Indian Healthcare Theme
+  indian_healthcare:
+    theme_name: "Indian Healthcare"
+    description: "Clean, trustworthy design for Indian healthcare applications"
+    primary_color: "#00BCD4"
+    secondary_color: "#546E7A"
+    accent_color: "#4CAF50"
+    background_color: "#FFFFFF"
+    text_color: "#263238"
+    font_family: "Lato, system-ui, sans-serif"
+    font_size_base: "16px"
+    border_radius: "6px"
+    spacing_unit: "8px"
+    mobile_optimized: true
+    accessibility_enhanced: true
+    css_variables:
+      "--health-primary": "#00BCD4"
+      "--health-success": "#4CAF50"
+      "--health-warning": "#FF9800"
+      "--health-emergency": "#F44336"
+      "--shadow-medical": "0 1px 6px rgba(0,0,0,0.12)"

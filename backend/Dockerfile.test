@@ -1,0 +1,37 @@
+FROM python:3.11-slim
+
+# Set working directory
+WORKDIR /app
+
+# Install system dependencies including Playwright dependencies
+RUN apt-get update && apt-get install -y \
+    gcc \
+    postgresql-client \
+    curl \
+    wget \
+    gnupg \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy requirements first for better caching
+COPY requirements.txt .
+COPY requirements-test.txt .
+
+# Install Python dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r requirements-test.txt
+
+# Install Playwright browsers
+RUN playwright install --with-deps chromium firefox webkit
+
+# Copy application code
+COPY . .
+
+# Create non-root user
+RUN useradd -m -u 1000 testuser && chown -R testuser:testuser /app
+USER testuser
+
+# Create test results directory
+RUN mkdir -p /app/test_results
+
+# Default command runs all tests
+CMD ["python", "-m", "pytest", "-v", "--tb=short", "--junitxml=/app/test_results/junit.xml", "--html=/app/test_results/report.html", "--self-contained-html"]
